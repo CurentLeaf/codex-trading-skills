@@ -45,3 +45,9 @@ The imported 74 Codex skills are **not yet connected to the web app or MCP tools
 ## Tests
 
 `npm test` validates symbol input, quote parsing, demo labeling and hypothetical position sizing.
+
+## AI research integration
+
+Set `OPENAI_API_KEY` in `marketlab/.env.local` and optionally `OPENAI_MODEL` (defaults to `gpt-6-luna`), then restart `npm run dev`. Open the **AI research assistant** section, enter a ticker and question, and optionally select up to three skill references. The server loads daily historical observations, validates the selected skills, and calls the OpenAI Responses API. No client-side API key is used.
+
+**Important:** The AI reads selected `SKILL.md` instructions as untrusted reference documents. It does not run arbitrary imported scripts, backtest strategies, place orders, or autonomously monitor markets. Reports may be incorrect. The API may incur usage charges. Public deployment requires user authentication and per-user quotas to prevent unauthorised API spending. The ChatGPT MCP server remains read-only and not public-ready.
