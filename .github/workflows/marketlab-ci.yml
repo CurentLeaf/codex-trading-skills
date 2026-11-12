@@ -1,0 +1,27 @@
+name: MarketLab checks
+on:
+  push:
+    paths:
+      - 'marketlab/**'
+      - '.github/workflows/marketlab-ci.yml'
+  pull_request:
+    paths:
+      - 'marketlab/**'
+      - '.github/workflows/marketlab-ci.yml'
+permissions:
+  contents: read
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: marketlab
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund
+      - run: npm audit --audit-level=moderate
+      - run: npm test
+      - run: npm run build
